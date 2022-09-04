@@ -1,0 +1,62 @@
+{
+    "Industrials": [
+        "Specialty Business Services",
+        "Electrical Equipment & Parts",
+        "Staffing & Employment Services",
+        "Building Products & Equipment",
+        "Aerospace & Defense"
+    ],
+    "Consumer Cyclical": [
+        "Specialty Retail",
+        "Luxury Goods",
+        "Apparel Retail",
+        "Personal Services",
+        "Footwear & Accessories",
+        "Department Stores",
+        "Auto Parts",
+        "Home Improvement Retail",
+        "Internet Retail",
+        "Residential Construction",
+        "Furnishings, Fixtures & Appliances",
+        "Packaging & Containers"
+    ],
+    "Communication Services": [
+        "Broadcasting",
+        "Internet Content & Information",
+        "Entertainment",
+        "Advertising Agencies",
+        "Electronic Gaming & Multimedia"
+    ],
+    "Healthcare": [
+        "Drug Manufacturers\u2014Specialty & Generic",
+        "Medical Devices",
+        "Biotechnology",
+        "Diagnostics & Research",
+        "Drug Manufacturers\u2014General",
+        "Medical Instruments & Supplies"
+    ],
+    "Basic Materials": [
+        "Building Materials",
+        "Steel",
+        "Other Industrial Metals & Mining"
+    ],
+    "Energy": [
+        "Oil & Gas E&P",
+        "Uranium",
+        "Oil & Gas Integrated"
+    ],
+    "Technology": [
+        "Consumer Electronics",
+        "Computer Hardware",
+        "Software\u2014Application",
+        "Software\u2014Infrastructure",
+        "Information Technology Services",
+        "Electronics & Computer Distribution"
+    ],
+    "Consumer Defensive": [
+        "Packaged Foods",
+        "Household & Personal Products",
+        "Education & Training Services",
+        "Tobacco"
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "Financial Services": [
+        "Banks\u2014Diversified",
+        "Insurance\u2014Property & Casualty",
+        "Credit Services",
+        "Shell Companies",
+        "Asset Management",
+        "Capital Markets",
+        "Banks\u2014Regional",
+        "Insurance\u2014Life",
+        "Insurance\u2014Reinsurance",
+        "Mortgage Finance",
+        "Financial Data & Stock Exchanges",
+        "Financial Conglomerates",
+        "Insurance Brokers",
+        "Insurance\u2014Diversified",
+        "Insurance\u2014Specialty"
+    ],
+    "Utilities": [
+        "Utilities\u2014Regulated Electric",
+        "Utilities\u2014Renewable",
+        "Utilities\u2014Diversified",
+        "Utilities\u2014Regulated Gas",
+        "Utilities\u2014Regulated Water",
+        "Utilities\u2014Independent Power Producers"
+    ],
+    "Real Estate": [
+        "REIT\u2014Retail",
+        "REIT\u2014Mortgage",
+        "REIT\u2014Industrial",
+        "REIT\u2014Healthcare Facilities",
+        "REIT\u2014Hotel & Motel",
+        "Real Estate Services",
+        "Real Estate\u2014Development",
+        "REIT\u2014Specialty",
+        "REIT\u2014Diversified",
+        "Real Estate\u2014Diversified",
+        "REIT\u2014Residential",
+        "REIT\u2014Office"
+    ],
+    "Financial": [
+        "Closed-End Fund - Equity"
+    ],
+    "": [
+        ""
+    ]
+}

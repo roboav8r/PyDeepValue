@@ -6,14 +6,14 @@ from socket import gaierror
 
 import json
 
-import yfinance as yf
+
 import pandas as pd
-from datetime import datetime, timedelta
 import numpy as np
 import sys
 import getopt
 
 import tickers
+import companyinfo
 
 
 class DeepValue:
@@ -111,8 +111,27 @@ if __name__ == "__main__":
         dv.printTickerLengths()
 
     if arg_download:
-        companyinfo.downloadAllValueData(tickers.loadTickerDict('../data/ticker_data/value_list.json'))
+        companyinfo.downloadAllValueData(tickers.loadTickerDict('../data/ticker_data/value_list.json'),dv,company_blacklist_path='../data/industry_data/company_blacklist.json')
 
+
+# NEXT
+
+# Redo columns of value spreadsheet
+# Add indent to ticker .jsons for readability
+# Short percent of float - compare to short interest website
+# List of failed companies - find out why! "Fund" fails
+
+
+# TO DO / KNOWN IMPROVEMENTS
+
+# Move to EDGAR API
+# Whitelist creation: modularize the file existence check. Check on startup?
+# Custom filepath for data / make this a parameter of the class
+# Make data files hidden / inaccessible? What happens if a name changes
+# Right now, library checks for existence of files but not contents or update time. it breaks if someone messes with file
+# MAke an update financial data which actually checks to see what is in the dataframe and merges the two!
+# Check dates on earnings reports - greater than 2 months? refresh_Earnings
+#  other edits (especially with data directory) to use as standalone library
 
 
 
@@ -138,25 +157,3 @@ if __name__ == "__main__":
 #dv.createIndustryWhitelist()
 # Create list of ALL industries
 #dv.createIndustryWhitelist(company_whitelist_path='../data/value_list.json',industry_whitelist_path='../data/industry_data/industry_list.json')
-
-
-
-# NEXT
-
-# Redo columns of value spreadsheet
-# Add indent to ticker .jsons for readability
-# Short percent of float - compare to short interest website
-# List of failed companies - find out why! "Fund" fails
-
-
-# TO DO / KNOWN IMPROVEMENTS
-
-# Whitelist creation: modularize the file existence check. Check on startup?
-# Clean up the value tickers list in the short term !!! add indent=4 !!!
-# Custom filepath for data / make this a parameter of the class
-# Make data files hidden / inaccessible? What happens if a name changes
-# Right now, library checks for existence of files but not contents or update time. it breaks if someone messes with file
-# MAke an update financial data which actually checks to see what is in the dataframe and merges the two!
-# Check dates on earnings reports - greater than 2 months? refresh_Earnings
-# __main__ function - starting from scratch, do all the screening, pulling data, and evaluating
-#  other edits (especially with data directory) to use as standalone library

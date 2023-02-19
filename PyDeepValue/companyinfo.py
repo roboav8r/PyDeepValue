@@ -1,3 +1,8 @@
+import yahooquery as yq
+from datetime import datetime, timedelta
+import json
+from os.path import exists
+
 ### COMPANY DATA FETCHING FUNCTIONS
 
 # Download latest company fundamental information, save to .json file
@@ -13,7 +18,27 @@ def downloadFundamentalData(symbol,path,current_time, ticker):
     # Save the company data as a JSON object
     with open(path, "w") as outfile:
         json.dump(data_dict, outfile, indent=4)
+
+def downloadKeyData(symbol,path,current_time, ticker, mod):
+
+    # Initialize data dictionary
+    data_dict = dict()
+
+    # Call the ticker object and save the data to the dictionary
+    data_dict = ticker.get_modules(mod)
+    data_dict['Last Updated'] = str(current_time)
     
+    # Save the company data as a JSON object
+    with open(path, "w") as outfile:
+        json.dump(data_dict, outfile, indent=4)
+
+def downloadAllFinancials(symbol,fin_path, q_fin_path, ticker):
+    # Get quarterly and annual financial dataframes
+    quarterly_financials_df = ticker.all_financial_data()
+    
+    # Save to .json file
+    quarterly_financials_df.to_csv(q_fin_path)
+
 
 # Download the latest financial data, save to specified paths
 def downloadFinancials(symbol,fin_path, q_fin_path, ticker):
@@ -154,28 +179,62 @@ def downloadCashflowData(symbol,cf_path, q_cf_path, ticker):
 #         return [cashflow_df, q_cashflow_df]
 
 # Download all data for all value candidates
-def downloadAllValueData(symbols):
+def downloadAllValueData(symbols,dv_obj,company_blacklist_path):
+
+    # Check if industry blacklist file exists. If not, create it with an empty list inside.
+    if exists(company_blacklist_path) is False:
+        print('No company blacklist file found. Creating.')
+
+        with open(company_blacklist_path, "w") as outfile:
+            json.dump([], outfile, indent=4)
 
     # Inputs:
     # symbols = list of symbols of tickers to get data for, e.g. ['A','B','C']
+    modules = 'summaryDetail price defaultKeyStatistics'
 
     for symbol in symbols:
         # Output 
         print('Downloading company info for: ' + str(symbol))
-        ticker = yf.Ticker(symbol)
+        ticker = yq.Ticker(symbol)
         current_time = datetime.now()
 
-        company_data_filepath = self.company_data_dir + str(symbol) + '.json'
-        downloadFundamentalData(str(symbol),company_data_filepath,current_time,ticker)
+        company_data_filepath = dv_obj.company_data_dir + str(symbol) + '.json'
+        company_fin_filepath = dv_obj.company_data_dir + str(symbol) + '_financials.json'
+        company_q_fin_filepath = dv_obj.company_data_dir + str(symbol) + '_quarterly_financials.json'
+        company_q_fin_csv_filepath = dv_obj.company_data_dir + str(symbol) + '_quarterly_financials.csv'
 
-        company_fin_filepath = self.company_data_dir + str(symbol) + '_financials.json'
-        company_q_fin_filepath = self.company_data_dir + str(symbol) + '_quarterly_financials.json'
-        downloadFinancials(symbol,company_fin_filepath,company_q_fin_filepath,ticker)
+        try:
+            downloadKeyData(str(symbol),company_data_filepath,current_time,ticker,modules)
+            downloadAllFinancials(symbol,company_fin_filepath,company_q_fin_csv_filepath,ticker)
         
-        company_bal_filepath = self.company_data_dir + str(symbol) + '_balance_sheet.json'
-        company_q_bal_filepath = self.company_data_dir + str(symbol) + '_quarterly_balance_sheet.json'    
-        downloadBalanceSheet(symbol,company_bal_filepath,company_q_bal_filepath,ticker)
+        except KeyboardInterrupt:
+                break
+        
+        except:
+            print('Error processing ' + str(symbol))
 
-        company_cashflow_filepath = self.company_data_dir + str(symbol) + '_cash_flow.json'
-        company_q_cashflow_filepath = self.company_data_dir + str(symbol) + '_quarterly_cash_flow.json'
-        downloadCashflowData(symbol,company_cashflow_filepath,company_q_cashflow_filepath,ticker)
+            # Open up company blacklist json as list
+            company_blacklist = json.load(open(company_blacklist_path))
+
+            company_blacklist.append(symbol)
+            
+            # Write blacklist to .json list file
+            with open(company_blacklist_path, "w") as outfile:
+                json.dump(company_blacklist, outfile, indent=4)
+
+
+
+        # company_data_filepath = dv_obj.company_data_dir + str(symbol) + '.json'
+        # downloadFundamentalData(str(symbol),company_data_filepath,current_time,ticker)
+
+        # company_fin_filepath = dv_obj.company_data_dir + str(symbol) + '_financials.json'
+        # company_q_fin_filepath = dv_obj.company_data_dir + str(symbol) + '_quarterly_financials.json'
+        # downloadFinancials(symbol,company_fin_filepath,company_q_fin_filepath,ticker)
+        
+        # company_bal_filepath = dv_obj.company_data_dir + str(symbol) + '_balance_sheet.json'
+        # company_q_bal_filepath = dv_obj.company_data_dir + str(symbol) + '_quarterly_balance_sheet.json'    
+        # downloadBalanceSheet(symbol,company_bal_filepath,company_q_bal_filepath,ticker)
+
+        # company_cashflow_filepath = dv_obj.company_data_dir + str(symbol) + '_cash_flow.json'
+        # company_q_cashflow_filepath = dv_obj.company_data_dir + str(symbol) + '_quarterly_cash_flow.json'
+        # downloadCashflowData(symbol,company_cashflow_filepath,company_q_cashflow_filepath,ticker)

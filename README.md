@@ -11,12 +11,54 @@ Create an app. Name it whatever you like, and use any callback URL (https://loca
 
 Open the app you just created and copy the Consumer Key into the included `key.json` file.
 
+# Prerequisites
+pip3 install yahooquote
 
-## To Do
+# Usage
+Downloading data for all companies:
+```
+python3 PyDeepValue/DeepValue.py -d
+python3 PyDeepValue/DeepValue.py --download
+```
+
+## Valuation functions to implement
+Some of these are included, I am just making a list
+- Categorize Peter Lynch-style: Slow grower, stalwart, fast grower, cyclical, turnaround, asset opportunity
+- Year-over-year earnings growth
+- PE ratio
+- PE ratio relative to historical average
+- PE ratio relative to industry average
+- PE ratio relative to earnings growth
+- ratio of debt to equity / balance sheet strength
+- Net cash per share
+- dividends and payout ratio
+- inventories
+
+## Good qualities to check for - subjective
+Also from Lynch
+- Boring name/product
+- company is a spin off
+- fast growth company in no growth industry
+- niche firm difficult for others to enter
+- recurring need for product, drugs, razors, etc
+- user but not producer of technology
+- low institutional holding
+- low analyst coverage
+- insider buying
+- company is buying back shares
+
+## To do
+- Put all companies in the valuation spreadsheet
+- Add symbol, name, sector, industry
+- define valuation functions and what data they need
+- sector and industy analysis: 
+
+
+## Improvements
 - Separate private (requires API key) class and general/public class (no key required but uses old data)
-- exception handling for if the description is blank, exchange is blank, or other edge cases so that the system exits gracefully
 - Test ideas: US tickers in, US tickers out should be same length
 - camel case? What's the standard on naming conventions for python? make everything consistent
 - clean up true/false boolean statements to put them on one line :D
 - fix printTickerLengths to make it generic based on the filepath
-- add default path values to self.valuepath, self.alltickerspath, etc
+- add default path values to self.valuepath, self.alltickerspath, etc, and make them member variables
+- refactor the libraries & modules

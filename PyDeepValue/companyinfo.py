@@ -190,7 +190,8 @@ def downloadAllValueData(symbols,dv_obj,company_blacklist_path):
 
     # Inputs:
     # symbols = list of symbols of tickers to get data for, e.g. ['A','B','C']
-    modules = 'summaryDetail price defaultKeyStatistics'
+    modules = 'assetProfile summaryDetail price defaultKeyStatistics'
+    modules = 'assetProfile recommendationTrend cashflowStatementHistory indexTrend defaultKeyStatistics industryTrend quoteType incomeStatementHistory fundOwnership summaryDetail insiderHolders calendarEvents upgradeDowngradeHistory price balanceSheetHistory earningsTrend secFilings institutionOwnership majorHoldersBreakdown balanceSheetHistoryQuarterly earningsHistory esgScores summaryProfile netSharePurchaseActivity insiderTransactions sectorTrend incomeStatementHistoryQuarterly cashflowStatementHistoryQuarterly earnings pageViews financialData'
 
     for symbol in symbols:
         # Output 

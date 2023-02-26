@@ -1,5 +1,7 @@
 # PyDeepValue
-Python library that finds deeply undervalued US equities via investment techniques of value investors Joel Greenblatt, Peter Lynch, &amp; Tobias Carlisle.
+Python library to help find and evaluate deeply undervalued US equities via investment techniques of value investors Joel Greenblatt, Peter Lynch, Aswath Damodoran, Roaring Kitty, Tobias Carlisle, and others.
+
+This is a work in progress but I am leaving it public in case anyone else might want to collaborate or 
 
 # Setup (optional if latest tickers required)
 Create a developer account with TD Ameritrade:
@@ -15,11 +17,33 @@ Open the app you just created and copy the Consumer Key into the included `key.j
 pip3 install yahooquote
 
 # Usage
-Downloading data for all companies:
+
+Getting all the tickers from TD Ameritrade:
+```
+python3 PyDeepValue/DeepValue.py -t
+python3 PyDeepValue/DeepValue.py --tickers
+```
+
+Screening tickers for eligible US equities:
+```
+python3 PyDeepValue/DeepValue.py -s
+python3 PyDeepValue/DeepValue.py --screen
+```
+
+Downloading data for all eligible companies:
 ```
 python3 PyDeepValue/DeepValue.py -d
 python3 PyDeepValue/DeepValue.py --download
 ```
+
+Making an overview/"universe" spreadsheet:
+```
+python3 PyDeepValue/DeepValue.py -u
+python3 PyDeepValue/DeepValue.py --universe
+```
+
+Performing a sector and industry analysis:
+
 
 ## Valuation functions to implement
 Some of these are included, I am just making a list
@@ -48,10 +72,9 @@ Also from Lynch
 - company is buying back shares
 
 ## To do
-- Put all companies in the valuation spreadsheet
-- Add symbol, name, sector, industry
+- sector and industry analysis
 - define valuation functions and what data they need
-- sector and industy analysis: 
+- company analysis
 
 
 ## Improvements
@@ -62,8 +85,9 @@ Also from Lynch
 - fix printTickerLengths to make it generic based on the filepath
 - add default path values to self.valuepath, self.alltickerspath, etc, and make them member variables
 - refactor the libraries & modules
+- for blacklist, give error code as to why it failed (e.g. no company info, call failed)
 
-# Other Valuation Ideas
+# Other Valuation Ideas / Features
 - Roaring Kitty "Tracker" spreadsheet for overall market and sectors - Debt/Region/Indices/Commodities/Industries/Style chart10y - price - ch
 - Tracking top 40: value, confidence
 - - watch, on deck, pulse (big companies that indicate market) - various levels of monitoring

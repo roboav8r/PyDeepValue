@@ -5,8 +5,6 @@ from os.path import exists
 from socket import gaierror
 
 import json
-
-
 import pandas as pd
 import numpy as np
 import sys
@@ -124,7 +122,7 @@ if __name__ == "__main__":
         dv.printTickerLengths()
 
     if arg_download:
-        companyinfo.downloadAllCompanyData(tickers.loadTickerDict('../data/ticker_data/value_list.json'),dv,dv.ticker_blacklist_path)
+        companyinfo.downloadAllCompanyData(tickers.loadTickerDict('../data/ticker_data/value_list.json'),dv.company_data_dir,dv.ticker_blacklist_path)
 
     if arg_universe:
         # Ensure there is a spreadsheet at the location
@@ -132,7 +130,7 @@ if __name__ == "__main__":
 
         # Populate spreadsheet
         value_tickers_list = tickers.loadTickerDict('../data/ticker_data/value_list.json')
-        universe.populateSheet(value_tickers_list, dv.universe_sheet_path, dv.ticker_blacklist_path)
+        universe.populateSheet(value_tickers_list, dv.ticker_blacklist_path, dv.company_data_dir , dv.universe_sheet_path)
 
 # NEXT
 

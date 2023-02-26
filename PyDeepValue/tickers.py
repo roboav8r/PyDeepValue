@@ -76,7 +76,7 @@ def getUsEquityJson(tickers_dict, us_tickers_filepath='../data/us_equity_tickers
 
 # Check to see if the ticker dictionary actually has a description (some do not)
 def hasDescription(ticker):
-    if 'description' in ticker.keys():
+    if 'description' in ticker.keys() and (ticker['description'] != "Symbol not found"):
         return True
     else:
         return False

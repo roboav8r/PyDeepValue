@@ -14,6 +14,7 @@ import getopt
 
 import tickers
 import companyinfo
+import universe
 
 
 class DeepValue:
@@ -24,8 +25,16 @@ class DeepValue:
         # Get TD Ameritrade consumer API key from .json file
         self.key = json.load(open(data_dir+'key.json'))
 
+        # Define ticker data directory
+        self.ticker_data_dir = data_dir + 'ticker_data/'
+        self.ticker_blacklist_path = self.ticker_data_dir + 'ticker_blacklist.json'
+
         # Define company data directory
         self.company_data_dir = data_dir + 'company_data/'
+
+        # Define universe data directory
+        self.universe_data_dir = data_dir + 'universe_data/'
+        self.universe_sheet_path = self.universe_data_dir + 'universe.csv'
 
     
     ### MISCELLANEOUS JSON/SCREENER/VALUE FUNCTIONS
@@ -48,14 +57,15 @@ if __name__ == "__main__":
     '''
     Handle user inputs
     '''
-    arg_help = "{0} -i <input> -u <user> -o <output>".format(sys.argv[0])
+    arg_help = "{0} -t gets tickers, -s to screen tickers, -d to download screened tickers, and -e to evaluate".format(sys.argv[0])
     arg_tickers = False
     arg_screen = False
     arg_download = False
+    arg_universe = False
     arg_evaluate = False
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "htsde", ["help", "tickers", "screen", "download", "evaluate"])
+        opts, args = getopt.getopt(sys.argv[1:], "htsdue", ["help", "tickers", "screen", "download", "universe", "evaluate"])
     except:
         print(arg_help)
         sys.exit(2)
@@ -70,12 +80,15 @@ if __name__ == "__main__":
             arg_screen = True
         elif opt in ("-d", "--download"):
             arg_download = True
+        elif opt in ("-u", "--universe"):
+            arg_universe = True
         elif opt in ("-e", "--evaluate"):
             arg_evaluate = True
 
     print('Get tickers: ', arg_tickers)
     print('Screen tickers: ', arg_screen)
     print('Download data: ', arg_download)
+    print('Build universe sheet: ', arg_universe)
     print('Evaluate companies: ', arg_evaluate)
 
 
@@ -111,8 +124,15 @@ if __name__ == "__main__":
         dv.printTickerLengths()
 
     if arg_download:
-        companyinfo.downloadAllValueData(tickers.loadTickerDict('../data/ticker_data/value_list.json'),dv,company_blacklist_path='../data/industry_data/company_blacklist.json')
+        companyinfo.downloadAllCompanyData(tickers.loadTickerDict('../data/ticker_data/value_list.json'),dv,dv.ticker_blacklist_path)
 
+    if arg_universe:
+        # Ensure there is a spreadsheet at the location
+        universe.initSheet(dv.universe_sheet_path)
+
+        # Populate spreadsheet
+        value_tickers_list = tickers.loadTickerDict('../data/ticker_data/value_list.json')
+        universe.populateSheet(value_tickers_list, dv.universe_sheet_path, dv.ticker_blacklist_path)
 
 # NEXT
 

@@ -179,13 +179,13 @@ def downloadCashflowData(symbol,cf_path, q_cf_path, ticker):
 #         return [cashflow_df, q_cashflow_df]
 
 # Download all data for all value candidates
-def downloadAllValueData(symbols,dv_obj,company_blacklist_path):
+def downloadAllCompanyData(symbols,dv_obj,ticker_blacklist_path):
 
     # Check if industry blacklist file exists. If not, create it with an empty list inside.
-    if exists(company_blacklist_path) is False:
-        print('No company blacklist file found. Creating.')
+    if exists(ticker_blacklist_path) is False:
+        print('No ticker blacklist file found. Creating.')
 
-        with open(company_blacklist_path, "w") as outfile:
+        with open(ticker_blacklist_path, "w") as outfile:
             json.dump([], outfile, indent=4)
 
     # Inputs:
@@ -215,14 +215,46 @@ def downloadAllValueData(symbols,dv_obj,company_blacklist_path):
             print('Error processing ' + str(symbol))
 
             # Open up company blacklist json as list
-            company_blacklist = json.load(open(company_blacklist_path))
+            ticker_blacklist = json.load(open(ticker_blacklist_path))
 
-            company_blacklist.append(symbol)
+            ticker_blacklist.append(symbol)
             
             # Write blacklist to .json list file
-            with open(company_blacklist_path, "w") as outfile:
-                json.dump(company_blacklist, outfile, indent=4)
+            with open(ticker_blacklist_path, "w") as outfile:
+                json.dump(ticker_blacklist, outfile, indent=4)
 
+# Download fundamental data or retrieve recently saved data, as appropriate
+# TODO come back here 25 feb
+def getCompanyData(symbol,company_data_dir,data_expiration=timedelta(days=7)):
+
+    company_data_filepath = company_data_dir + str(symbol) + '.json'
+    current_time = datetime.now()
+
+    # Check if company fundamental data file exists
+    if exists(company_data_filepath):
+
+        # Open fundamental data as dictionary
+        comp_data_dict = json.load(open(company_data_filepath))
+
+        # Check if data has expired
+        update_datetime = datetime.strptime(fund_data_dict['Last Updated'],"%Y-%m-%d %H:%M:%S.%f")
+        timedelta_since_update = current_time - update_datetime
+        data_is_expired = (timedelta_since_update > data_expiration)
+
+        # If data is expired
+        if data_is_expired:
+            comp_data = downloadAllCompanyData(symbol,company_data_filepath,current_time)
+            return comp_data
+        # Otherwise, use the retrieved data
+        else:
+            return comp_data_dict
+    
+    # If data doesn't exist, OR it's expired
+    else:
+        new_data = self.downloadFundamentalData(symbol,company_data_filepath,current_time)
+    
+        # Return dataframe objects
+        return new_data
 
 
         # company_data_filepath = dv_obj.company_data_dir + str(symbol) + '.json'

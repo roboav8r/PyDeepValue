@@ -44,7 +44,7 @@ Also from Lynch
 - user but not producer of technology
 - low institutional holding
 - low analyst coverage
-- insider buying
+- insider buying - OpenInsider?
 - company is buying back shares
 
 ## To do
@@ -62,3 +62,12 @@ Also from Lynch
 - fix printTickerLengths to make it generic based on the filepath
 - add default path values to self.valuepath, self.alltickerspath, etc, and make them member variables
 - refactor the libraries & modules
+
+# Other Valuation Ideas
+- Roaring Kitty "Tracker" spreadsheet for overall market and sectors - Debt/Region/Indices/Commodities/Industries/Style chart10y - price - ch
+- Tracking top 40: value, confidence
+- - watch, on deck, pulse (big companies that indicate market) - various levels of monitoring
+- Roaring Kitty Universe
+- Roaring Kitty Company/fundamental analysis
+- "Tags": keywords of the company; insiders own, PE firm involved, fund managers involved, 
+- - Specific analyst or company purchasing?

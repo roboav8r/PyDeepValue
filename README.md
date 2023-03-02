@@ -43,7 +43,10 @@ python3 PyDeepValue/DeepValue.py --universe
 ```
 
 Performing a sector and industry analysis:
-
+```
+python3 PyDeepValue/DeepValue.py -i
+python3 PyDeepValue/DeepValue.py --industry
+```
 
 ## Valuation functions to implement
 Some of these are included, I am just making a list
@@ -78,6 +81,7 @@ Also from Lynch
 
 
 ## Improvements
+- Switch to EDGAR API - https://www.sec.gov/edgar/sec-api-documentation
 - Separate private (requires API key) class and general/public class (no key required but uses old data)
 - Test ideas: US tickers in, US tickers out should be same length
 - camel case? What's the standard on naming conventions for python? make everything consistent

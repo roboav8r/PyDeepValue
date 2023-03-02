@@ -60,10 +60,11 @@ if __name__ == "__main__":
     arg_screen = False
     arg_download = False
     arg_universe = False
+    arg_industry = False
     arg_evaluate = False
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "htsdue", ["help", "tickers", "screen", "download", "universe", "evaluate"])
+        opts, args = getopt.getopt(sys.argv[1:], "htsduie", ["help", "tickers", "screen", "download", "universe", "industry", "evaluate"])
     except:
         print(arg_help)
         sys.exit(2)
@@ -80,6 +81,8 @@ if __name__ == "__main__":
             arg_download = True
         elif opt in ("-u", "--universe"):
             arg_universe = True
+        elif opt in ("-i", "--industry"):
+            arg_industry = True
         elif opt in ("-e", "--evaluate"):
             arg_evaluate = True
 

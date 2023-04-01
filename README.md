@@ -1,7 +1,7 @@
 # PyDeepValue
-Python library to help find and evaluate deeply undervalued US equities via investment techniques of value investors Joel Greenblatt, Peter Lynch, Aswath Damodoran, Roaring Kitty, Tobias Carlisle, and others.
+Python library to help find and evaluate deeply undervalued US equities via investment techniques of value investors Joel Greenblatt, Peter Lynch, Aswath Damodoran, Roaring Kitty, Tobias Carlisle, and Aswath Damodaran.
 
-This is a work in progress but I am leaving it public in case anyone else might want to collaborate or 
+NOTE: ***This is a work in progress but I am leaving it public in case anyone else might want to collaborate!***
 
 # Setup (optional if latest tickers required)
 Create a developer account with TD Ameritrade:
@@ -99,3 +99,6 @@ Also from Lynch
 - Roaring Kitty Company/fundamental analysis
 - "Tags": keywords of the company; insiders own, PE firm involved, fund managers involved, 
 - - Specific analyst or company purchasing?
+
+# References
+https://pages.stern.nyu.edu/adamodar/pdfiles/eqnotes/packet1pg2.pdf

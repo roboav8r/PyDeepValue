@@ -1,5 +1,5 @@
 # PyDeepValue
-Python library to help find and evaluate deeply undervalued US equities via investment techniques of value investors Joel Greenblatt, Peter Lynch, Aswath Damodoran, Roaring Kitty, Tobias Carlisle, and Aswath Damodaran.
+Python library to help find and evaluate deeply undervalued US equities via investment techniques of value investors Joel Greenblatt, Peter Lynch, Roaring Kitty, Tobias Carlisle, and Aswath Damodaran.
 
 NOTE: ***This is a work in progress but I am leaving it public in case anyone else might want to collaborate!***
 

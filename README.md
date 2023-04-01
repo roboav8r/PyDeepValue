@@ -3,6 +3,11 @@ Python library to help find and evaluate deeply undervalued US equities via inve
 
 NOTE: ***This is a work in progress but I am leaving it public in case anyone else might want to collaborate!***
 
+Current status:
+- Pulls data from Yahoo Finance API
+- Some relative valuation metrics can be generated into a spreadsheet
+- Getting started on intrinsic valuation based on Aswath Damodaran's lectures
+
 # Setup (optional if latest tickers required)
 Create a developer account with TD Ameritrade:
 https://developer.tdameritrade.com/

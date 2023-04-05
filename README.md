@@ -83,6 +83,7 @@ Also from Lynch
 - sector and industry analysis
 - define valuation functions and what data they need
 - company analysis
+- add yahooquery to requirements
 
 
 ## Improvements

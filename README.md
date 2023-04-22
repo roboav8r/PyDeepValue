@@ -92,6 +92,8 @@ Also from Lynch
 - for blacklist, give error code as to why it failed (e.g. no company info, call failed)
 
 # Other Valuation Ideas / Features
+- Novy-Marx ratio
+- "Magic Formula" from Joel Greenblatt
 - Roaring Kitty "Tracker" spreadsheet for overall market and sectors - Debt/Region/Indices/Commodities/Industries/Style chart10y - price - ch
 - Tracking top 40: value, confidence
 - - watch, on deck, pulse (big companies that indicate market) - various levels of monitoring
